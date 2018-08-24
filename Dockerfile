@@ -13,8 +13,7 @@ RUN dpkg --add-architecture i386 \
 		vim \
 		less \
 		man \
-		libssl-dev:i386 \
-		libmariadb-dev:i386
+		libssl-dev:i386
 
 # CMake
 RUN \ 
