@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:jessie
 
 RUN dpkg --add-architecture i386 \
 	&& apt-get -qq update \
