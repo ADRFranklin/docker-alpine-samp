@@ -27,7 +27,7 @@ RUN \
 	rm -rf /tmp/cmake
 
 # Boost
-RUN BOOST_VERSION=1.68.0
+RUN export BOOST_VERSION=1.68.0
 RUN mkdir -p /tmp/boost
 RUN wget -q -O /tmp/boost/boost.tar.gz https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/boost_`echo $BOOST_VERSION | sed 's|\.|_|g'`.tar.gz
 RUN	tar xfz /tmp/boost/boost.tar.gz -C /tmp/boost/ --strip-components=1
