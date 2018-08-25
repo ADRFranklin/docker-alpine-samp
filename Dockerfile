@@ -27,16 +27,15 @@ RUN \
 	rm -rf /tmp/cmake
 
 # Boost
-RUN \ 
-	BOOST_VERSION=1.68.0 && \ 
-	mkdir -p /tmp/boost && \ 
-	wget -q -O /tmp/boost/boost.tar.gz https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/boost_`echo $BOOST_VERSION | sed 's|\.|_|g'`.tar.gz && \ 
-	tar xfz /tmp/boost/boost.tar.gz -C /tmp/boost/ --strip-components=1 && \ 
-	cd /tmp/boost && \ 
-	./bootstrap.sh --prefix=/usr/local --with-libraries=system,chrono,thread,regex,date_time,atomic && \ 
-	./b2 variant=release link=static threading=multi address-model=32 runtime-link=shared -j2 -d0 install && \ 
-	cd - && \ 
-	rm -rf /tmp/boost
+RUN BOOST_VERSION=1.68.0
+RUN mkdir -p /tmp/boost
+RUN wget -q -O /tmp/boost/boost.tar.gz https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/boost_`echo $BOOST_VERSION | sed 's|\.|_|g'`.tar.gz
+RUN	tar xfz /tmp/boost/boost.tar.gz -C /tmp/boost/ --strip-components=1
+RUN cd /tmp/boost
+RUN	./bootstrap.sh --prefix=/usr/local --with-libraries=system,chrono,thread,regex,date_time,atomic
+RUN	./b2 variant=release link=static threading=multi address-model=32 runtime-link=shared -j2 -d0 install 
+RUN	cd -
+RUN	rm -rf /tmp/boost
 
 COPY .bashrc /root
 
