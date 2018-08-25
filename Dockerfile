@@ -27,9 +27,8 @@ RUN \
 	rm -rf /tmp/cmake
 
 # Boost
-RUN export BOOST_VERSION=1.68.0
 RUN mkdir -p /tmp/boost
-RUN wget -q -O /tmp/boost/boost.tar.gz https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/boost_`echo $BOOST_VERSION | sed 's|\.|_|g'`.tar.gz
+RUN wget -q -O /tmp/boost/boost.tar.gz https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.gz
 RUN	tar xfz /tmp/boost/boost.tar.gz -C /tmp/boost/ --strip-components=1
 RUN cd /tmp/boost
 RUN	./bootstrap.sh --prefix=/usr/local --with-libraries=system,chrono,thread,regex,date_time,atomic
