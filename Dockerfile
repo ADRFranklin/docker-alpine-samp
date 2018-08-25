@@ -1,22 +1,29 @@
 FROM alpine:3.7
 
-# Trick to add 32 bit libs
+# Add 32 bit libs
 RUN echo "x86" > /etc/apk/arch
 
 # Update and Upgrade system
 RUN apk update && apk upgrade
 
 # Add Packages
-RUN apk add ca-certificates
-RUN apk add wget
-RUN apk add make
-RUN apk add git
-RUN apk add unzip
-RUN apk add vim
-RUN apk add less
-RUN apk add man
-RUN apk add libressl-dev
-RUN apk add --no-cache binutils cmake make libgcc musl-dev gcc g++
+RUN \
+    apk add --no-cache ca-certificates && \
+    apk add --no-cache wget && \
+    apk add --no-cache make && \
+    apk add --no-cache git && \
+    apk add --no-cache unzip && \
+    apk add --no-cache vim && \
+    apk add --no-cache less && \
+    apk add --no-cache man && \
+    apk add --no-cache libressl-dev && \
+    apk add --no-cache binutils && \
+    apk add --no-cache cmake && \
+    apk add --no-cache make && \
+    apk add --no-cache libgcc && \
+    apk add --no-cache musl-dev && \
+    apk add --no-cache gcc && \
+    apk add --no-cache g++
 
 # CMake
 RUN \ 
