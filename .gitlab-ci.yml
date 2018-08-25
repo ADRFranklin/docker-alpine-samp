@@ -12,5 +12,5 @@ build:
     - docker build -t "$CI_REGISTRY_IMAGE:latest" .
     - docker push "$CI_REGISTRY_IMAGE:latest"
     - docker login -u "$DOCKER_HUB_USERNAME" -p "$DOCKER_HUB_PASSWORD"
-    - docker tag temp "$DOCKER_HUB_USERNAME/alpine-samp:latest"
+    - docker build -t "$DOCKER_HUB_USERNAME/alpine-samp:latest" .
     - docker push "$DOCKER_HUB_USERNAME/alpine-samp:latest"
