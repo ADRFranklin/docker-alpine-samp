@@ -32,11 +32,12 @@ RUN \
     wget -q -O /tmp/boost/boost.tar.gz https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.gz && \
     tar xfz /tmp/boost/boost.tar.gz -C /tmp/boost/ --strip-components=1 && \
     cd /tmp/boost/ && \
-    chmod +x bootstrap.sh && \
     ./bootstrap.sh --prefix=/usr/local --with-libraries=system,chrono,thread,regex,date_time,atomic && \
     ./b2 variant=release link=static threading=multi address-model=32 runtime-link=shared -j2 -d0 install && \
     cd - && \
-    rm -rf /tmp/boost
+    rm -rf /tmp/boost \
+    cat bootstrap.log|| true
+
 
 COPY .bashrc /root
 
