@@ -16,6 +16,7 @@ RUN apk add vim
 RUN apk add less
 RUN apk add man
 RUN apk add libressl-dev
+RUN apk add --no-cache binutils cmake make libgcc musl-dev gcc g++
 
 # CMake
 RUN \ 
@@ -35,9 +36,7 @@ RUN \
     ./bootstrap.sh --prefix=/usr/local --with-libraries=system,chrono,thread,regex,date_time,atomic && \
     ./b2 variant=release link=static threading=multi address-model=32 runtime-link=shared -j2 -d0 install && \
     cd - && \
-    rm -rf /tmp/boost \
-    cat bootstrap.log|| true
-
+    rm -rf /tmp/boost
 
 COPY .bashrc /root
 
