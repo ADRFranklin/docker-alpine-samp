@@ -4,7 +4,7 @@ FROM alpine:3.7
 RUN echo "x86" > /etc/apk/arch
 
 # Update and Upgrade system
-RUN apk update && apk upgrade -y && apk install -y
+RUN apk update && apk upgrade
 
 # Add Packages
 RUN apk add ca-certificates
