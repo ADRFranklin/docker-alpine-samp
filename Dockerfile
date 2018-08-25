@@ -3,19 +3,20 @@ FROM alpine:3.7
 # Trick to add 32 bit libs
 RUN echo "x86" > /etc/apk/arch
 
-RUN apt -qq update \
-	&& apt -qq upgrade -y \
-	&& apt -qq install -y --no-install-recommends \
-		ca-certificates \
-		wget \
-		g++-multilib \
-		make \
-		git \
-		unzip \
-		vim \
-		less \
-		man \
-		libssl-dev
+# Update and Upgrade system
+RUN apk update && apk upgrade -y && apk install -y
+
+# Add Packages
+RUN apk add ca-certificates
+RUN apk add wget
+RUN apk add g++-multilib
+RUN apk add make
+RUN apk add git
+RUN apk add unzip
+RUN apk add vim
+RUN apk add less
+RUN apk add man
+RUN apk add libssl-dev
 
 # CMake
 RUN \ 
