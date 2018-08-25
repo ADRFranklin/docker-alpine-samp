@@ -1,9 +1,11 @@
-FROM debian:jessie
+FROM alpine:3.7
 
-RUN dpkg --add-architecture i386 \
-	&& apt-get -qq update \
-	&& apt-get -qq upgrade -y \
-	&& apt-get -qq install -y --no-install-recommends \
+# Trick to add 32 bit libs
+RUN echo "x86" > /etc/apk/arch
+
+RUN apt -qq update \
+	&& apt -qq upgrade -y \
+	&& apt -qq install -y --no-install-recommends \
 		ca-certificates \
 		wget \
 		g++-multilib \
@@ -13,7 +15,7 @@ RUN dpkg --add-architecture i386 \
 		vim \
 		less \
 		man \
-		libssl-dev:i386
+		libssl-dev
 
 # CMake
 RUN \ 
@@ -35,24 +37,6 @@ RUN \
 	./b2 variant=release link=static threading=multi address-model=32 runtime-link=shared -j2 -d0 install && \ 
 	cd - && \ 
 	rm -rf /tmp/boost
-
-# SA-MP server + includes
-RUN \ 
-	mkdir -p /tmp/samp && \ 
-	wget -q -O /tmp/samp/sampsvr-linux.tar.gz http://files.sa-mp.com/samp037svr_R2-2-1.tar.gz && \ 
-	tar xfz /tmp/samp/sampsvr-linux.tar.gz -C /root/ && \ 
-	wget -q -O /tmp/samp/sampsvr-win32.zip http://files.sa-mp.com/samp037_svr_R2-2-1_win32.zip && \ 
-	unzip /tmp/samp/sampsvr-win32.zip pawno/include/* -d /root/samp03 && \ 
-	rm -rf /tmp/samp
-
-# PAWN compiler
-RUN \ 
-	PAWN_COMPILER_VERSION=3.10.8 && \ 
-	mkdir -p /tmp/pawncc && \ 
-	wget -q -O /tmp/pawncc/pawncc.tar.gz https://github.com/Southclaws/pawn/releases/download/v${PAWN_COMPILER_VERSION}/pawnc-${PAWN_COMPILER_VERSION}-linux.tar.gz && \ 
-	tar xfz /tmp/pawncc/pawncc.tar.gz -C /usr/local/ --strip-components=1 && \ 
-	ldconfig && \ 
-	rm -rf /tmp/pawncc
 
 COPY .bashrc /root
 
