@@ -9,7 +9,6 @@ RUN apk update && apk upgrade
 # Add Packages
 RUN apk add ca-certificates
 RUN apk add wget
-RUN apk add g++-multilib
 RUN apk add make
 RUN apk add git
 RUN apk add unzip
