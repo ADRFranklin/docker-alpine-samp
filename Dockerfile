@@ -15,7 +15,7 @@ RUN apk add unzip
 RUN apk add vim
 RUN apk add less
 RUN apk add man
-RUN apk add libssl-dev
+RUN apk add libressl-dev
 
 # CMake
 RUN \ 
