@@ -1,9 +1,8 @@
-# SA:MP Docker image 
-A docker image made to run SA:MP servers using Alpine.
+# SAMPCTL Docker image 
+A docker image made to run sampctl
 
 # Information
-- Pawn Compiler is located at `/usr/local/pawncc`
-- SA:MP Server package is located at `/root`
+- Sampctl is installed in `/usr/local/bin/` 
 
-# Credit
-Maddinat0r - Original Docker image written for Debian [Maddinat0rs Repo](https://github.com/maddinat0r/docker-debian-samp)
+# Other Interesting Repos
+- [Maddinat0rs Repo](https://github.com/maddinat0r/docker-debian-samp)
