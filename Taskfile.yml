@@ -1,0 +1,22 @@
+# https://taskfile.dev
+
+version: "2"
+
+vars:
+  REGISTRY: registry.gitlab.com
+  OWNER: adrfranklin
+  SERVICE: alpine-samp
+  GIT_COMMIT: { sh: git describe --always --dirty --tags }
+
+tasks:
+  build:
+    cmds:
+      - docker build -t {{.SERVICE}} .
+
+  push:
+    deps: ["build"]
+    cmds:
+      - docker tag {{.SERVICE}} {{.REGISTRY}}/{{.OWNER}}/{{.SERVICE}}:{{.GIT_COMMIT}}
+      - docker push {{.REGISTRY}}/{{.OWNER}}/{{.SERVICE}}:{{.GIT_COMMIT}}
+      - docker tag {{.SERVICE}} {{.REGISTRY}}/{{.OWNER}}/{{.SERVICE}}:latest
+      - docker push {{.REGISTRY}}/{{.OWNER}}/{{.SERVICE}}:latest
